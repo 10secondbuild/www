@@ -112,6 +112,14 @@ body > section {
     color: rgb(112, 116, 122);
 }
 
+#pricing {
+    background: url(../images/diamonds.png) repeat #232a31;
+}
+
+
+#signup {
+    background: url(../images/pentagon.png) repeat #232a31;
+}
 
 #technology{
     background-color: #fff;
@@ -129,6 +137,24 @@ body > section {
 #technology li img {
     width: 200px;
     margin: 2rem;
+}
+
+.bot {
+    position: absolute;
+    left: -5000px;
+}
+
+#signup {
+    text-align: center;
+}
+
+#signup form {
+    padding: 10px 0
+}
+
+#signup input {
+    background-color: #232a31;
+    border: 1px solid white;
 }
 
 
