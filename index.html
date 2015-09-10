@@ -15,7 +15,7 @@
         <li><a href="#rational">Rational</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#technology">Technology</a></li>
-        <li><a href="#signup">Signup</a></li>
+        <li><label for="email" class="signup">Signup</label></li>
     </ul>
 </nav>
 <header id="home">
@@ -38,16 +38,18 @@
 
 <section id="pricing">
     <h3>Pricing</h3>
-    <dl>
+    <dl id="free">
         <dt>Free Tier</dt>
         <dd>
             <ul>
                 <li>All builds under 10 seconds are free forever</li>
-                <li>First 100 minutes are free</li>
-                <li>Unlimited concu</li>
+                <li>First 10 minutes are free</li>
+                <li>Unlimited concurrency</li>
             </ul>
         </dd>
-
+        <label for="email" class="signup">Signup</label>
+    </dl>
+    <dl id="payg">
         <dt>Pay As You Go</dt>
         <dd>
             <ul>
@@ -56,6 +58,7 @@
                 <li>Only pay for the running of your Docker image NOT pulling the Docker image down</li>
             </ul>
         </dd>
+        <label for="email" class="signup">Signup</label>
     </dl>
 
 </section>
@@ -75,7 +78,7 @@
     <h3>Signup to be notified of availability</h3>
     <form action="//bodar.us11.list-manage.com/subscribe/post?u=17c61b6c126785acf5c1056bd&amp;id=1b08ff3585"
           method="post" target="_blank" novalidate>
-        <input type="email" value="" name="EMAIL" placeholder="user@example.com"/>
+        <input type="email" value="" name="EMAIL" id="email" placeholder="user@example.com"/>
         <input type="text" name="b_17c61b6c126785acf5c1056bd_1b08ff3585" tabindex="-1" value="" class="bot"/>
         <input type="submit" value="Subscribe" name="subscribe"/>
     </form>

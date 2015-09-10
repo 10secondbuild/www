@@ -73,11 +73,22 @@ nav {
     margin: 0;
 }
 
-nav, nav a, nav a:visited, nav a:hover {
+nav {
     background-color: 2B2B2B;
     color: white;
     padding: 1rem;
 }
+
+a, a:visited, a:hover {
+    color: white;
+    padding: 1rem;
+}
+
+.signup {
+    border: 2px solid;
+    padding: 5px 10px;
+}
+
 
 nav ul {
     padding: 0;
@@ -112,15 +123,6 @@ body > section {
     color: rgb(112, 116, 122);
 }
 
-#pricing {
-    background: url(../images/diamonds.png) repeat #232a31;
-}
-
-
-#signup {
-    background: url(../images/pentagon.png) repeat #232a31;
-}
-
 #technology{
     background-color: #fff;
     color: black;
@@ -145,6 +147,7 @@ body > section {
 }
 
 #signup {
+    background: url(../images/pentagon.png) repeat #232a31;
     text-align: center;
 }
 
@@ -155,6 +158,42 @@ body > section {
 #signup input {
     background-color: #232a31;
     border: 1px solid white;
+}
+
+#pricing {
+    background: url(../images/diamonds.png) repeat #232a31;
+}
+
+#pricing dl {
+    border: 1px solid;
+    width: 300px;
+    height: 300px;
+    display:inline-block
+    margin: 0 auto;
+    text-align: center;
+}
+
+#pricing dd {
+    margin: 0;
+    text-align: left;
+}
+
+
+
+#pricing li {
+    margin: 0 1em 0 0;
+}
+
+
+#pricing dt{
+    font-size:1.33333em;
+    text-align: center;
+    padding: 1em;
+    background-color: rgb(225, 76, 88);
+}
+
+#pricing #payg dt {
+    background-color: #034C54
 }
 
 
