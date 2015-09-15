@@ -53,15 +53,27 @@ span.logo span.build {
 }
 
 .PlanPricing {
-    margin-top: 2em;
+    margin: 0 15px;
+    padding: 0;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    border-radius: 20px;
+
 }
 
 .PlanPricing .planName {
     padding-top: 1em;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .PlanPricing .planFeatures {
     height: 15em;
+}
+
+.PlanPricing .planSign a {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .img-thumbnail {
