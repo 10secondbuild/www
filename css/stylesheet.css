@@ -63,3 +63,7 @@ span.logo span.build {
 .PlanPricing .planFeatures {
     height: 15em;
 }
+
+.img-thumbnail {
+    width: 100%;
+}
