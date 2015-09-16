@@ -25,16 +25,6 @@ span.logo span.build {
     color: #2CC76A;
 }
 
-img.docker {
-    height: 120px;
-    margin-top: -22px;
-    margin-bottom: -10px;
-}
-
-img.packet {
-    height: 88px;
-}
-
 .concurrent {
     font-size: 88px;
     color: #EF8F29;
