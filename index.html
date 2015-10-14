@@ -44,8 +44,6 @@
   });
 </script>
 
-<!--==============CONTACT FORM=================-->
-<script src="js/contact_form.js"></script>
 </head>
 <body id="home" data-spy="scroll" data-target=".navbar-collapse" data-offset="100">
 
@@ -161,6 +159,54 @@
     </div>
   </div>
 
+  <div class="row PageHead" id="how2">
+    <div class="col-md-12">
+      <h1>Example</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Developer pushes to GitHub</h4>
+
+      <pre><code>$ git push
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 293 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To git@github.com:{username}/{project}.git
+ee2d2cc..fc07faf  master -> master
+</code></pre>
+    </div>
+  </div>
+
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4>GitHub WebHook is triggered</h4>
+      <p>It sends a POST request to our API</p>
+
+      <pre><code>POST /{username}/{pipeline} HTTP/1.1
+Host: api.10second.build
+Content-type: application/json
+
+{
+  "ref": "refs/heads/master",
+  "before": "41d2bbed175521131e79fa4f31e287706bef9beb",
+  "after": "13c3f0831b21aaa4e81917d6f683c6faca47f8cf",
+  "created": false,
+  "deleted": false,
+  "forced": false,
+  "base_ref": null,
+  "compare": "https://github.com/{username}/{project}/compare/41d2bbed1755...13c3f0831b21",
+  "commits": [ ...
+
+      </code></pre>
+    </div>
+  </div>
 
 
   <!--============== Pricing ==============-->
