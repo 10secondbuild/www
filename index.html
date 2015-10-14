@@ -188,7 +188,7 @@ Compressing objects: 100% (3/3), done.
   <div class="row">
     <div class="col-md-12">
       <h4><a href="https://developer.github.com/webhooks/">GitHub WebHook</a> is triggered</h4>
-      <p>It sends a POST request to our API (https://api.10second.build/p/{username}/{pipeline})</p>
+      <p>It sends a POST request to our API</p>
 
       <pre><code>POST /p/{username}/{pipeline} HTTP/1.1
 Host: api.10second.build
@@ -241,10 +241,25 @@ compile:
 ...
       </code></pre>
 
-      <p>The result will be some binaries (Jar files in this example) </p>
+      <p>The result will be some binaries (Jar files in this example) in a Docker volume and the console.log. Again the next stage is only trigger on a zero exit code</p>
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Finally we <a href="https://github.com/10secondbuild/github-release">release to GitHub</a></h4>
+      <p>This final step takes the binaries and uploads them on the GitHub release page</p>
+
+      <pre><code>Creating release 2.197 ...
+...
+Release id: 1957965
+Uploading artifact {project}-{version}.jar...
+...
+      </code></pre>
+
+      <p>And that's it, each stage is just another process that is chained together similar to Unix pipes or chain loading. The only real difference is that we wait for each process to exit before passing the output from one to another. </p>
+    </div>
+  </div>
 
 
   <!--============== Pricing ==============-->
