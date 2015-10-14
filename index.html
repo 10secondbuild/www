@@ -159,9 +159,12 @@
     </div>
   </div>
 
+  <!--============== Example ==============-->
+
   <div class="row PageHead" id="how2">
     <div class="col-md-12">
-      <h1>Example</h1>
+      <h1>Detailed Example</h1>
+      <h3>3 stages: checkout from GitHub, run a build command and release to GitHub</h3>
     </div>
   </div>
 
@@ -189,7 +192,7 @@ ee2d2cc..fc07faf  master -> master
       <h4>GitHub WebHook is triggered</h4>
       <p>It sends a POST request to our API</p>
 
-      <pre><code>POST /{username}/{pipeline} HTTP/1.1
+      <pre><code>POST /p/{username}/{pipeline} HTTP/1.1
 Host: api.10second.build
 Content-type: application/json
 
@@ -207,6 +210,53 @@ Content-type: application/json
       </code></pre>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Our API starts the <a href="https://github.com/10secondbuild/github-checkout">GitHub checkout stage</a></h4>
+      <p>Our API pipes the JSON from GitHub into standard input and sets various CGI environment variables. This is the standard output log:</p>
+
+      <pre><code>Cloning into '.'...
+remote: Counting objects: 26563, done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 26563 (delta 3), reused 0 (delta 0), pack-reused 26553
+Receiving objects: 100% (26563/26563), 3.33 MiB | 1.63 MiB/s, done.
+Resolving deltas: 100% (14870/14870), done.
+Checking connectivity... done.
+      </code></pre>
+
+      <p>The result is we have turned the GitHub push event into the exact SHA1 checkout, you are of course free to fork the Dockerfile or run script or use a completely different mechanism.</p>
+
+      <p>If no errors happen the next stage is run...</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Next we run the <a href="https://github.com/10secondbuild/jcompilo-java-8">build stage</a></h4>
+      <p>It doesn't really matter what the build command is as you can install any dependencies you wish inside the Docker image.</p>
+
+      <pre><code>java version "1.8.0_45"
+Java(TM) SE Runtime Environment (build 1.8.0_45-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
+
+build: class com.googlecode.jcompilo.convention.AutoBuild
+update:
+
+clean:
+   [delete] Deleting directory: /data/10second.build/checkout/build/artifacts
+
+compile:
+      [zip] Creating: /data/10second.build/checkout/build/artifacts/{project}.build.jar
+     [copy] Copying 27 files
+    [javac] Compiling 418 source files
+...
+      </code></pre>
+
+      <p>The result will be some binaries (Jar files in this example) </p>
+    </div>
+  </div>
+
 
 
   <!--============== Pricing ==============-->
