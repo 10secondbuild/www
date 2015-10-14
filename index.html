@@ -9,7 +9,7 @@
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!--==============GOOGLE FONT - OPEN SANS=================-->
-<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
 <!--============== ICON FONT FONT-AWESOME=================-->
 
@@ -170,16 +170,14 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h4>Developer pushes to GitHub</h4>
+      <h4>A developer pushes to GitHub</h4>
+      <p>This could be any VCS that supports WebHooks or commit hooks.</p>
 
       <pre><code>$ git push
 Counting objects: 3, done.
 Delta compression using up to 8 threads.
 Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 293 bytes | 0 bytes/s, done.
-Total 3 (delta 2), reused 0 (delta 0)
-To git@github.com:{username}/{project}.git
-ee2d2cc..fc07faf  master -> master
+...
 </code></pre>
     </div>
   </div>
@@ -189,8 +187,8 @@ ee2d2cc..fc07faf  master -> master
 
   <div class="row">
     <div class="col-md-12">
-      <h4>GitHub WebHook is triggered</h4>
-      <p>It sends a POST request to our API</p>
+      <h4><a href="https://developer.github.com/webhooks/">GitHub WebHook</a> is triggered</h4>
+      <p>It sends a POST request to our API (https://api.10second.build/p/{username}/{pipeline})</p>
 
       <pre><code>POST /p/{username}/{pipeline} HTTP/1.1
 Host: api.10second.build
@@ -198,36 +196,32 @@ Content-type: application/json
 
 {
   "ref": "refs/heads/master",
-  "before": "41d2bbed175521131e79fa4f31e287706bef9beb",
   "after": "13c3f0831b21aaa4e81917d6f683c6faca47f8cf",
-  "created": false,
-  "deleted": false,
-  "forced": false,
-  "base_ref": null,
-  "compare": "https://github.com/{username}/{project}/compare/41d2bbed1755...13c3f0831b21",
-  "commits": [ ...
-
-      </code></pre>
+  ...
+  "repository": {
+    "clone_url": "https://github.com/{user}/{project}.git",
+    ...
+  }</code></pre>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
       <h4>Our API starts the <a href="https://github.com/10secondbuild/github-checkout">GitHub checkout stage</a></h4>
-      <p>Our API pipes the JSON from GitHub into standard input and sets various CGI environment variables. This is the standard output log:</p>
+      <p>Our API pipes the JSON data into standard input of the Docker process and sets various CGI environment variables. In this example Docker image it uses <a href="https://stedolan.github.io/jq/">jq</a> to extract data and pass the correct arguments to git. This is the standard output from the process:</p>
 
-      <pre><code>Cloning into '.'...
+      <pre><code>Repository: https://github.com/{user}/{project}.git
+Cloning into '.'...
 remote: Counting objects: 26563, done.
 remote: Compressing objects: 100% (10/10), done.
 remote: Total 26563 (delta 3), reused 0 (delta 0), pack-reused 26553
-Receiving objects: 100% (26563/26563), 3.33 MiB | 1.63 MiB/s, done.
-Resolving deltas: 100% (14870/14870), done.
-Checking connectivity... done.
+Checking out SHA1: 13c3f0831b21aaa4e81917d6f683c6faca47f8cf
+...
       </code></pre>
 
-      <p>The result is we have turned the GitHub push event into the exact SHA1 checkout, you are of course free to fork the Dockerfile or run script or use a completely different mechanism.</p>
+      <p>The result is we have turned the GitHub push event into the exact SHA1 checkout, you could use this method to support any VCS you like very easily. For example if you are using CVS you could add a commit hook that posted to our API</p>
 
-      <p>If no errors happen the next stage is run...</p>
+      <p>If Docker process exits with 0 then next stage is run...</p>
     </div>
   </div>
 
@@ -236,20 +230,14 @@ Checking connectivity... done.
       <h4>Next we run the <a href="https://github.com/10secondbuild/jcompilo-java-8">build stage</a></h4>
       <p>It doesn't really matter what the build command is as you can install any dependencies you wish inside the Docker image.</p>
 
-      <pre><code>java version "1.8.0_45"
-Java(TM) SE Runtime Environment (build 1.8.0_45-b14)
-Java HotSpot(TM) 64-Bit Server VM (build 25.45-b02, mixed mode)
-
-build: class com.googlecode.jcompilo.convention.AutoBuild
+      <pre><code>build: class com.googlecode.jcompilo.convention.AutoBuild
 update:
+  ...
 
 clean:
    [delete] Deleting directory: /data/10second.build/checkout/build/artifacts
 
 compile:
-      [zip] Creating: /data/10second.build/checkout/build/artifacts/{project}.build.jar
-     [copy] Copying 27 files
-    [javac] Compiling 418 source files
 ...
       </code></pre>
 
