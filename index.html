@@ -62,8 +62,9 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><a href="#home">Home</a></li>
-        <li class="hidden-sm"><a href="#rational">Rationale</a></li>
         <li><a href="#how">How it Works</a></li>
+        <li class="hidden-sm"><a href="#example">Example</a></li>
+        <li class="hidden-sm"><a href="#faq">FAQ</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#technology">Technology</a></li>
         <li><a href="#signup" role="button" class="btn btn-success">Sign Up</a></li>
@@ -161,7 +162,7 @@
 
   <!--============== Example ==============-->
 
-  <div class="row PageHead" id="how2">
+  <div class="row PageHead" id="example">
     <div class="col-md-12">
       <h1>Example</h1>
       <h3>3 stages: checkout from GitHub, run a build command and release to GitHub</h3>
@@ -261,6 +262,48 @@ Uploading artifact {project}-{version}.jar...
     </div>
   </div>
 
+
+  <!--============== FAQ ==============-->
+
+  <div class="row PageHead" id="faq">
+    <div class="col-md-12">
+      <h1>FAQ</h1>
+      <h3>Common Questions</h3>
+
+      <ul>
+        <li>
+          <dl>
+            <dt>How can I run this on my own infrastructure?</dt>
+            <dd>Currently we are focused on a fully managed service only</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>Is this service for building Docker images?</dt>
+            <dd>No it uses Docker as an extension mechanism, you should probably use <a href="https://docs.docker.com/docker-hub/builds/">Docker Hub's automated build</a> system like we do to create reusable stages. Think building a Docker stage is about creating an environment with specific dependencies pre-installed. You then run the stage (the bit we do) to take say your source code and turn it into say binaries or push it to an environment.</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>You talk about bare metal but also Hyper/Docker, aren't they virtualisation tools?</dt>
+            <dd>We run as close to the metal as possible but we still care about security of our platform and user sandboxing. We get a lot of our speed because we only run one OS on each of our nodes, rather than layer upon layer of virtualisation and multiple guest operating systems that most of our competitors use.</dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>Surely I could just run millions of 10 second builds, for infinite free CPU usage?</dt>
+            <dd>We are working out a fair use policy that shouldn't effect regular users but would limit any abusive behaviour (DDOS, spaming, bitcoin mining etc). Also we think if you just want free CPU time you can use an of our competitors without the trouble of having to break your problem in 10 second chunks ;). </dd>
+          </dl>
+        </li>
+        <li>
+          <dl>
+            <dt>Does your service magically make my build run faster or in parallel or in 10 seconds?</dt>
+            <dd>Unless you are already running on high end bare metal boxes, you should see a noticeable increase in performance just due to our hardware/software setup. However we don't do anything magical inside your build stage. So if you want parallelism you need to enable that in your build tool of choice.</dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <!--============== Pricing ==============-->
   <div class="row PageHead" id="pricing">
